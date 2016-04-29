@@ -10,11 +10,11 @@ var config = {
     //程序运行端口
     port : 3000,
     //数据库链接
-    db : 'mongodb://10.211.55.6/ManageApi',
+    db : 'mongodb://123.57.34.154/ManageApi',
 }
 
 if(config.debug){
-    config.db =  'mongodb://10.211.55.6/ManageApi';
+    config.db =  'mongodb://123.57.34.154/ManageApi';
 }
 
 module.exports = config;
