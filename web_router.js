@@ -15,7 +15,10 @@ var routeConf = {
     },
 
     '/home' : {
-        'get' : site.home
+        'get' : site.home,
+        '/:name' : {
+            get : site.page
+        }
     },
     //接口管理
     '/apis' : {

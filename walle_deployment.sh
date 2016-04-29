@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-projectName='ManageApi'
+projectName='ManageApi' #项目名称
+
 projectDir='/var/www/test/'$projectName  #项目路径
 packageDir='/var/www/test/temp/'$projectName    #项目第三方包路径
 packageJson=$packageDir'/package.json'  #json包配置文件
