@@ -10,7 +10,7 @@ var config = {
     //程序运行端口
     port : 3000,
     //数据库链接
-    db : 'mongodb://10.211.55.6/ManageApi',
+    db : 'mongodb://10.211.55.6/ManageApi'
 }
 
 if(config.debug){
