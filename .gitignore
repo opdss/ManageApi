@@ -1,0 +1,6 @@
+.idea
+logs/*
+bower_components
+node_modules
+Gruntfile.js
+rev

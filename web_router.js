@@ -1,0 +1,93 @@
+/**
+ * Created by wuxin on 16/4/9.
+ */
+var express = require('express');
+var site = require('./controllers/site');
+var apis = require('./controllers/apis');
+var items = require('./controllers/items');
+var params = require('./controllers/params');
+
+var router = express.Router();
+
+var routeConf = {
+    '/' : {
+        'get' : site.index
+    },
+
+    '/home' : {
+        'get' : site.home
+    },
+    //接口管理
+    '/apis' : {
+        '/list' : {
+            'get' : apis.list
+        },
+        '/add' : {
+            'post' : apis.add
+        },
+        '/del' : {
+            '/:id' : {
+                'get': apis.del
+            }
+        },
+        '/edit' : {
+            'get' : apis.edit
+        }
+    },
+    //接口组即项目管理
+    '/items' : {
+        '/list' : {
+            'get' : items.list
+        },
+        '/add' : {
+            'post' : items.add
+        },
+        '/del' : {
+            'get' : items.del
+        },
+        '/edit' : {
+            'get' : items.edit
+        }
+    },
+    //参数管理
+    '/params' : {
+        '/list' : {
+            'get' : params.list
+        },
+        '/add' : {
+            'post' : params.add
+        },
+        '/del' : {
+            'get' : params.del
+        },
+        '/edit' : {
+            'get' : params.edit
+        }
+    }
+}
+
+router.map = function(routeConf, route){
+    route = route || '';
+    for (var k in routeConf){
+        switch (typeof routeConf[k]) {
+            case 'object':
+                router.map(routeConf[k], route+k);
+                break;
+            case 'function':
+                //console.log(route+'==>'+routeConf[k])
+                router[k](route, routeConf[k]);
+                break;
+        }
+    }
+}
+
+router.map(routeConf);
+
+
+// home page
+//router.get('/', site.index);
+//router.get('/home', site.home);
+
+//接口管理
+router.get('')
+module.exports = router;

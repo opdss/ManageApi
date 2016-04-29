@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+</head>
+<body>
+<div>
+    <form action="/debugPage/check" method="POST" target="_blank">
+        <fieldset>
+            <legend>调试</legend>
+            <p>
+                <label for="debug">debug: </label>
+                debug:<input name="debug" type="radio" value="1" checked="true"/>
+                xhprof:<input name="debug" type="radio" value="xhprof" />
+                testdecode:<input name="debug" type="radio" value="testdecode" />
+                nodebug:<input name="debug" type="radio" value="" />
+            </p>
+
+            <p>
+                <label form="request_url">request_url:</label>
+                <input name="request_url" type="text" value="<%=request_url%>">
+            </p>
+
+            <p>
+                <label form="request_url">请求方式:</label>
+                <input name="request_method" type="radio" value="POST" />POST
+                <input name="request_method" type="radio" checked value="GET" />GET
+            </p>
+
+            <p>
+                <label for="api">方法: </label>
+                <select name="api" >
+                    <% apis.forEach(function(params, idx){ %>
+                    <option value="<%= params.api %>"><%= params.api %></option>
+                    <% }); %>
+                </select>
+            </p>
+
+            <div id="param">
+                <label for="param">参数: </label>
+
+                <% var i=0; apis.forEach(function(data, idx){ %>
+
+                    <div id='<%=data.api%>' style='margin-left:30px;display:<%= i==0?'':'none' %>'>
+
+                        <% data.params.forEach(function(params, idx){ %>
+                            <span style="width: 80px;display: inline-block;text-align: right"><%= params.name %></span> : <input type='text' name='<%= params.name %>' <%= i==0?'':'disabled' %> value='<%= params.value %>'><br/>
+                        <% }); %>
+
+                    </div>
+                <% i++; }); %>
+            </div>
+            <input type="submit" value="提交"> <input type="reset" value="重置">
+        </fieldset>
+    </form>
+</div>
+
+<script type="text/javascript" src="/js/libs/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $('select[name=api]').change(function(){
+        var pid = $(this).val();
+        $('#param').find('div').hide().find('input').attr('disabled',true);
+        $('#'+pid).show().find('input').attr('disabled',false);
+    });
+    $('input[type=text]').css('width','300px');
+    $('#param input').css('margin','4px');
+</script>
+</body>
+</html>

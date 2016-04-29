@@ -1,0 +1,23 @@
+{
+  "name": "ManageApi",
+  "description": "",
+  "main": "",
+  "authors": [
+    "opdss <opdss@qq.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/opdss/ManageApi",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/js/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "bootstrap": "^3.3.6",
+    "angularjs": "*"
+  }
+}
