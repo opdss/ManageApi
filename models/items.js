@@ -7,10 +7,13 @@ var Schema = mongoose.Schema;
 
 var ItemsSchema = new Schema({
     'name' : {type: String},    //名称
+    'content' : {type: String, default: ''},     //组说明
+    'params' : {type: String, default: ''}, //组全局params
+    'header' : {type: String, default: ''}, //组全局header
     //'authorId' : {type: ObjectId},   //创建者
-    'description' : {type: String, default: ''},   //接口描述
-    'content' : {type: String, default: ''},     //接口说明
+    'description' : {type: String, default: ''},   //组描述
     'createTime' : {type: Date, default: Date.now},     //创建时间
+    'isDel' : {type: Boolean, default: true}, //伪删除
 });
 
 mongoose.model('Items', ItemsSchema);

@@ -22,6 +22,7 @@ var routeConf = {
     },
     //接口管理
     '/apis' : {
+        'get' : apis.list,
         '/list' : {
             'get' : apis.list
         },
@@ -35,6 +36,9 @@ var routeConf = {
         },
         '/edit' : {
             'get' : apis.edit
+        },
+        '/info' : {
+            'get' : apis.info
         }
     },
     //接口组即项目管理
