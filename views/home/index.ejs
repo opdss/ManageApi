@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap-theme.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="js/libs/jquery/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="js/libs/bootstrap/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
+    <script src="js/common.js"></script>
+    <script src="js/home.js"></script>
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="v_head">
+    <nav class="navbar navbar-default navbar-fixed-top v_navbar">
+        <div class="container">
+            <div class="v_navbar_left">left</div>
+            <div class="v_navbar_middle">middle</div>
+            <div class="v_navbar_right">right</div>
+        </div>
+    </nav>
+</div>
+
+<!-- 主体 -->
+<div class="v_body">
+    <% for(x in items){ console.log(items[x]);%>
+        <div class="jumbotron v_body_card">
+            <p><%=items[x].title %></p>
+
+            <p>...</p>
+
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+        </div>
+    <% } %>
+</div>
+
+<!-- 底部 -->
+<div class="v_foot">
+
+</div>
+
+</body>
+</html>

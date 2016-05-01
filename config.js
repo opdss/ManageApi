@@ -5,6 +5,8 @@
 var config = {
     //调试模式开关
     debug : process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development',
+    //每页数据量
+    pageSize : 9,
     //名称
     name : 'api调试管理',
     //程序运行端口

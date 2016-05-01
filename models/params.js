@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ParamsSchema = new Schema({
-    'name' : {type: String},    //名称
+    'title' : {type: String},    //名称
     'field' : {type: String},  //参数名称 如 page
     'isMust': {type: Boolean, default: false},  //是否必须
     'type': {type: String, default: 'string'}, //参数类型
