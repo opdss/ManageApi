@@ -32,21 +32,24 @@ exports.list = function(req, res, next){
     }
 }
 
-
 //ajax get 获取对应接口的详细信息
 exports.info = function(req, res, next){
-    var apiId = req.params.id;
-    Apis.getInfoById(apiId, function(err, data){
-        if(err){
-            res.send({'errno':1,'errmsg':err.message});
-        }else{
-            if(!data){
-                res.send({'errno': 2, 'errmsg': 'no data'});
-            }else {
-                res.send({'errno': 0, 'errmsg': 'success', 'data': data});
+    var apiId = req.query.apiId || null;
+    if(apiId) {
+        Apis.getInfoById(apiId, function (err, data) {
+            if (err) {
+                res.send({'errno': 1, 'errmsg': err.message});
+            } else {
+                if (!data) {
+                    res.send({'errno': 2, 'errmsg': 'no data'});
+                } else {
+                    res.send({'errno': 0, 'errmsg': 'success', 'data': data});
+                }
             }
-        }
-    })
+        });
+    }else{
+        res.send({'errno': 1, 'errmsg': 'params error'});
+    }
 }
 
 exports.add = function(req, res, next){

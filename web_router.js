@@ -39,9 +39,7 @@ var routeConf = {
             'get' : apis.edit
         },
         '/info' : {
-            '/:id' : {
-                'get' : apis.info
-            }
+            'get' : apis.info
         }
     },
     //接口组即项目管理
