@@ -9,6 +9,13 @@ exports.index = function(req, res, next){
     })
 }
 
+exports.send = function(req, res, next){
+    requests.get('http://www.baidu.com',{},function(reqInfo, resInfo){
+        res.send(resInfo);
+    })
+}
+
+
 exports.add = function(req, res, next){
     res.send(req.host+req.port+req.url);
 }

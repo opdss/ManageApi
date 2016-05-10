@@ -1,6 +1,11 @@
 /**
  * Created by wuxin on 16/4/29.
  */
+    console.log(({}+{}));
+(function test(){
+    var a=1;
+    console.log(this.a);
+})()
 var EventProxy = require('eventproxy');
 console.log(EventProxy);
 var proxy = new EventProxy();

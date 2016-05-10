@@ -1,13 +1,13 @@
 /**
  * Created by wuxin on 16/4/28.
  */
-var Item = require('../proxy').Item
+var Items = require('../proxy').Items
 exports.list = function(req, res, next){
     res.send(req.host+req.port+req.url);
 }
 
 exports.add = function(req, res, next){
-    Item.add(req.query.name, function(err){
+    Items.add(req.query.name, function(err){
         if(err){
             res.send(err);
         }else{

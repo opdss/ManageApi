@@ -4,6 +4,7 @@
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
+var ObjectId  = Schema.ObjectId;
 
 var ParamsSchema = new Schema({
     'title' : {type: String},    //名称
@@ -13,7 +14,7 @@ var ParamsSchema = new Schema({
     'description' : {type: String},  //参数说明
     //'authorId': {type: ObjectId}, //创建者
     'retCount': {type: Number, default: 0}, //接口引用数量
-    'itemId': {type: Schema.Types.ObjectId}, //所属组
+    'itemId': {type: ObjectId}, //所属组
     'createTime': {type: Date, default: Date.now}, //创建时间
 });
 

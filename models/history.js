@@ -1,17 +1,16 @@
 /**
- * Created by wuxin on 16/4/27.
+ * Created by wuxin on 16/5/2.
  */
-
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var ObjectId  = Schema.ObjectId;
+var ObjectId = Schema.ObjectId;
 
-var ApisSchema = new Schema({
+var HistorySchema = new Schema({
     'title': {type: String}, //名称
     'api': {type: String},  //接口名. 如 item/del
     'method': {type: String},  //请求方法. 如 get
     'description': {type: String, default: ''}, //简介说明
-    'params' : {type: String, default: []},  //参数组
+    'params' : {type: String, default: ''},  //参数组
     'reqBody' : {type: String, default: ''},  //请求body
     'resBody' : {type: String, default: ''},  //响应body
     'reqHeader' : {type: String, default: ''}, //请求header
@@ -19,9 +18,9 @@ var ApisSchema = new Schema({
     //'authorId': {type: ObjectId}, //创建者
     'itemId': {type: ObjectId}, //所属组
     'createTime': {type: Date, default: Date.now}, //创建时间
-    'isDel' : {type: Boolean, default: false}, //伪删除
+    'md5Api' : {type: String}, //记录指纹 api+method+params+reqBoy+reqHeader+itemId
 });
 
-ApisSchema.index({'api': 1});
+HistorySchema.index({'md5Api' : 1});
 
-mongoose.model('Apis', ApisSchema);
+mongoose.model('History', HistorySchema);

@@ -6,6 +6,7 @@ var site = require('./controllers/site');
 var apis = require('./controllers/apis');
 var items = require('./controllers/items');
 var params = require('./controllers/params');
+var history = require('./controllers/history');
 
 var router = express.Router();
 
@@ -22,7 +23,7 @@ var routeConf = {
     },
     //接口管理
     '/apis' : {
-        'get' : apis.list,
+        'get' : apis.index,
         '/list' : {
             'get' : apis.list
         },
@@ -38,7 +39,9 @@ var routeConf = {
             'get' : apis.edit
         },
         '/info' : {
-            'get' : apis.info
+            '/:id' : {
+                'get' : apis.info
+            }
         }
     },
     //接口组即项目管理
@@ -69,6 +72,21 @@ var routeConf = {
         },
         '/edit' : {
             'get' : params.edit
+        }
+    },
+    //参数管理
+    '/history' : {
+        '/list' : {
+            'get' : history.list
+        },
+        '/add' : {
+            'post' : history.add
+        },
+        '/del' : {
+            'get' : history.del
+        },
+        '/edit' : {
+            'get' : history.edit
         }
     }
 }

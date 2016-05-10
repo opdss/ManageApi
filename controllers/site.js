@@ -18,10 +18,11 @@ exports.index = function(req, res, next){
     Items.getList({'isDel': false}, options, function(err,data){
         if(!err){
             res.render(
-                'home/index',
+                'home',
                 {
                     title : '主页',
-                    items : data
+                    items : data,
+                    layout : 'layout.ejs'
                 }
             )
         }else{

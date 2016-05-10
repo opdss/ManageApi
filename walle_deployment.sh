@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 projectName='ManageApi' #项目名称
+propre='/var/www/test'
 
-projectDir='/var/www/test/'$projectName  #项目路径
-packageDir='/var/www/test/temp/'$projectName    #项目第三方包路径
+projectDir=$propre'/'$projectName  #项目路径
+packageDir=$propre'/temp/'$projectName    #项目第三方包路径
 packageJson=$packageDir'/package.json'  #json包配置文件
 
 if [ ! -d "$projectDir" ]

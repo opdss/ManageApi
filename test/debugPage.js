@@ -26,7 +26,11 @@ var apis = [
 ];
 
 router.get('/', function(req, res, next){
-    console.log(req.headers);
+    req.session.user = 'wuxin';
+    console.log(req.session);
+    res.cookie('user' , 'haoren');
+    //res.cookies.
+    console.log(req.cookies);
     res.render(
         __dirname+'/debugPageTpl.ejs',
         {
@@ -36,6 +40,16 @@ router.get('/', function(req, res, next){
             'apis' : apis,
         }
     );
+});
+
+router.get('/test', function(req, res, next){
+    var str = '';
+    for(var x in req){
+        console.log(x);
+        console.log(req[x]);
+        //str+= x +':'+ req[x] + '<br/>';
+    }
+    res.send('1');
 });
 
 

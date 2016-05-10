@@ -29,32 +29,7 @@
     </style>
 </head>
 <body>
-
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
-        </div>
-    </div>
-</nav>
+<%- include('nav') -%>
 <!--********************************-->
 <div class="container-fluid">
     <div class="row col-md-10 col-md-offset-1 _wrap">
@@ -86,22 +61,7 @@
 
     </div>
 </div>
-</div>
 
-<!--================================================== -->
-<footer class="bs-docs-footer" role="contentinfo">
-    <div class="container">
-        <div class="row" style="text-align:center">
-            <p>本项目由<a href="https://github.com/opdss" target="_blank">@opdss</a> and <a href="https://github.com/vanki" target="_blank">@vanki</a>支持与维护</p>
-            <p>有任何意见请<a href="mailto:opdss@qq.com">联系我们</a></p>
-            <p>本项目源码受 <a rel="license" href="https://github.com/opdss/ManageApi/blob/master/LICENSE" target="_blank">APACHE</a>开源协议保护。</p>
-        </div>
-    </div>
-</footer>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
     var metro_color = [
         '#E51400', //红色
@@ -117,5 +77,7 @@
     ];
     $('._wrap').children().find('.thumbnail').each(function(){$(this).css({'background-color':metro_color[Math.floor(Math.random()*10)]});});
 </script>
+<!--================================================== -->
+<%- include('footer') -%>
 </body>
 </html>

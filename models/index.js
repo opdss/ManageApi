@@ -21,7 +21,11 @@ mongoose.connect(
 require('./items.js');
 require('./apis.js');
 require('./params.js');
+require('./user.js');
+require('./history.js');
 
 exports.Items = mongoose.model('Items');
 exports.Apis = mongoose.model('Apis');
 exports.Params = mongoose.model('Params');
+exports.User = mongoose.model('User');
+exports.History = mongoose.model('History');

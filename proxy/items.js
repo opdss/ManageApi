@@ -2,7 +2,7 @@
  * Created by wuxin on 16/4/27.
  */
 var Items = require('../models').Items;
-var EventA
+//var EventA
 
 exports.getList = function(query, opts, callback){
     //Items.find().exec(callback);
