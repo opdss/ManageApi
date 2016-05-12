@@ -2,6 +2,7 @@
  * Created by wuxin on 16/5/9.
  */
 var History = require('../proxy').History;
+var verify = require('../common/verify.js');
 
 exports.add = function(req, res, next){
     //var username = req.session.userInfo.username || null;
@@ -22,14 +23,18 @@ exports.add = function(req, res, next){
     var userInfo = req.session.userInfo || null;
     //var userInfo = null;
     if(userInfo){
-        hisData['username'] = userInfo.username;
-        History.saveToHistory(hisData, function(err, data){
-            if(err){
-                res.send(err);
-            }else {
-                res.send(data);
-            }
-        });
+        hisData['authorId'] = userInfo._id;
+        if(verify.history(hisData)) {
+            History.saveToHistory(hisData, function (err, doc) {
+                if (err) {
+                    res.json({'errno': 1, 'errmsg': err.message});
+                } else {
+                    res.json({'errno': 0, 'errmsg': 'success', data: doc});
+                }
+            });
+        }else{
+            res.json({'errno': 1, 'errmsg': 'param error'});
+        }
     }else{
         //res.send('aaa');
         var history = req.session.history || [];
@@ -42,8 +47,23 @@ exports.add = function(req, res, next){
 }
 
 exports.list = function(req, res, next){
-    var username = req.session.userInfo.username || null;
-    res.send(username);
+    var userInfo = req.session.userInfo || null;
+    if(userInfo){
+        History.getList({authorId : userInfo._id}, function(err, data){
+            if (err) {
+                res.json({'errno': 1, 'errmsg': err.message});
+            } else {
+                res.json({'errno': 0, 'errmsg': 'success', data: data});
+            }
+        });
+    }else{
+        //res.send('aaa');
+        var history = req.session.history || [];
+        //res.send(history);
+        history = history.concat(hisData);
+        req.session.history = history;
+        res.json({'errno': 0, 'errmsg': 'success', data: history});
+    }
 }
 
 exports.info = function(req, res, next){

@@ -1,11 +1,10 @@
 /**
  * Created by wuxin on 16/4/27.
  */
-var Items = require('../proxy').Items
-
-var EventProxy = require('eventproxy')
-
-var ItemsModel = require('../models').Items
+var Items = require('../proxy').Items;
+var ItemsModel = require('../models').Items;
+var EventProxy = require('eventproxy');
+var verify = require('../common/verify.js');
 
 exports.list = function(req, res, next){
     res.send('faefae');
@@ -28,32 +27,56 @@ exports.add = function(req, res, next){
         'content' : req.body.content || '',     //组说明
         'params' : req.body.params || null, //组全局params
         'header' : req.body.header || null, //组全局header
-        //'authorId' : {type: ObjectId},   //创建者
+        'authorId' : req.session.userInfo._id,   //创建者
         'description' : req.body.description || '',   //组描述
         'createTime' : Date.now(),     //创建时间
         'isDel' : false, //伪删除
     }
-    Items.add(data, function(err){
-        if(err){
-            res.send(err);
-        }else{
-            res.toJson('ook');
+    if(!verify.item(data)) {
+        return res.json({'errno': 1, 'errmsg': '输入信息有误'});
+    }
+    Items.add(data, function (err) {
+        if (err) {
+            res.json({'errno': 1, 'errmsg': err.message});
+        } else {
+            res.json({'errno': 0, 'errmsg': 'success'});
         }
-    })
+    });
 }
 
 exports.del = function(req, res, next) {
-    Items.delById(req.query.id, function(err){
+    var itemId = req.query.itemId;
+    Items.delById(itemId, function(err, doc){
         if(err){
-            res.send(err);
+            res.json({'errno': 1, 'errmsg': err.message});
         }else{
-            res.send('ok');
+            res.json({'errno': 0, 'errmsg': 'success', data: doc});
         }
     })
 }
 
 exports.edit = function(req, res, next){
-    res.send(req.host+req.port+req.url);
+    var itemId = req.query.itemId;
+    var data = {
+        'title' : req.body.title,    //名称
+        'content' : req.body.content || '',     //组说明
+        'params' : req.body.params || null, //组全局params
+        'header' : req.body.header || null, //组全局header
+        'authorId' : req.session.userInfo._id,   //创建者
+        'description' : req.body.description || '',   //组描述
+        'createTime' : Date.now(),     //创建时间
+        'isDel' : false, //伪删除
+    }
+    if(!itemId || !verify.item(data)) {
+        return res.json({'errno': 1, 'errmsg': '输入信息有误'});
+    }
+    Items.updateById(itemId, data, function (err, doc) {
+        if (err) {
+            res.json({'errno': 1, 'errmsg': err.message});
+        } else {
+            res.json({'errno': 0, 'errmsg': 'success', data: doc});
+        }
+    });
 }
 
 exports.info = function(req, res, next){

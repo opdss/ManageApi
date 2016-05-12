@@ -15,12 +15,13 @@ var HistorySchema = new Schema({
     'resBody' : {type: String, default: ''},  //响应body
     'reqHeader' : {type: String, default: ''}, //请求header
     'resHeader' : {type: String, default: ''}, //响应header
-    //'authorId': {type: ObjectId}, //创建者
+    'authorId': {type: ObjectId}, //创建者
     'itemId': {type: ObjectId}, //所属组
     'createTime': {type: Date, default: Date.now}, //创建时间
     'md5Api' : {type: String}, //记录指纹 api+method+params+reqBoy+reqHeader+itemId
 });
 
-HistorySchema.index({'md5Api' : 1});
+//HistorySchema.index({authorId : 1, md5Api : -1});
+HistorySchema.index({authorId : 1});
 
 mongoose.model('History', HistorySchema);

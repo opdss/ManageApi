@@ -5,3 +5,4 @@ exports.Apis = require('./apis.js');
 exports.Items = require('./items.js');
 exports.Params = require('./params.js');
 exports.History = require('./history.js');
+exports.User = require('./user.js');

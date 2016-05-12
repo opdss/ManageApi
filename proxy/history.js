@@ -9,11 +9,24 @@ exports.add = function(data, callback){
 }
 
 
+exports.getList = getList = function(query, opts, callback) {
+    //Items.find().exec(callback);
+    History.find(query, null, opts, callback);
+}
+
 exports.saveToSession = saveToSession = function(data, callback){
 
 }
 
 exports.saveToHistory = saveToHistory = function(data, callback){
-    var his = new History(data);
-    his.save(callback);
+    History.find({'authorId': data['authorId'], 'md5Api': data['md5Api']}, function(err, doc){
+        if(doc.length == 0){
+            var his = new History(data);
+            his.save(callback);
+        }else{
+            callback({'message': 'exists'});
+        }
+    });
+    //var his = new History(data);
+    //his.save(callback);
 }

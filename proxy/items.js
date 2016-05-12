@@ -15,5 +15,9 @@ exports.add = function(data, callback){
 };
 
 exports.delById = function(id, callback){
-
+    Items.remove({_id: id}, callback);
 };
+
+exports.updateById = function(id, data, callback){
+    Items.update({_id: id}, data, callback);
+}

@@ -43,7 +43,8 @@
     "gulp-sass": "^2.0.3",
     "gulp-uglify": "^1.2.0",
     "iconv-lite": "~0.4.13",
-    "imagemin-pngquant": "*"
+    "imagemin-pngquant": "*",
+    "nodemailer": "^0.7.1"
   },
   "bak": {
     "grunt": "~0.4.5",

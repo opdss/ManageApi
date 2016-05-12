@@ -1,27 +1,23 @@
 /**
  * Created by wuxin on 16/4/29.
  */
-    console.log(({}+{}));
-(function test(){
-    var a=1;
-    console.log(this.a);
-})()
-var EventProxy = require('eventproxy');
-console.log(EventProxy);
-var proxy = new EventProxy();
-var render = function (template, data, l10n){
-    _.template(template, data);
-};
-proxy.assign("template", "data", "l10n", render);
-$.get("template", function (template) {
-    // something
-    proxy.trigger("template", template);
+var nodemailer  = require("nodemailer");
+var user = 'wuxin@kuaiyong.net',
+    pass = '12345';
+
+var smtpTransport = nodemailer.createTransport("SMTP", {
+    host : 'smtp.kuaiyong.net',
+    port: 25, // port for secure SMTP
+    auth: {
+        user: user,
+        pass: pass
+    }
 });
-$.get("data", function (data) {
-    // something
-    proxy.trigger("data", data);
-});
-$.get("l10n", function (l10n) {
-    // something
-    proxy.trigger("l10n", l10n);
+smtpTransport.sendMail({
+    from    : 'Fred Foo<wuxin@kuaiyong.net>'
+    , to      : 'opdss@qq.com'
+    , subject : 'Node.JS通过SMTP协议从QQ邮箱发送邮件'
+    , html    : '这是一封测试邮件 <br> '
+}, function(err, res) {
+    console.log(err, res);
 });

@@ -7,6 +7,7 @@ var apis = require('./controllers/apis');
 var items = require('./controllers/items');
 var params = require('./controllers/params');
 var history = require('./controllers/history');
+var sign = require('./controllers/sign');
 
 var router = express.Router();
 
@@ -54,7 +55,7 @@ var routeConf = {
             'get' : items.del
         },
         '/edit' : {
-            'get' : items.edit
+            'post' : items.edit
         }
     },
     //参数管理
@@ -86,6 +87,16 @@ var routeConf = {
         '/edit' : {
             'get' : history.edit
         }
+    },
+    //登录管理
+    '/signin' : {
+        'post' : sign.signin
+    },
+    '/signup' : {
+        'post' : sign.signup
+    },
+    '/signout' : {
+        'get' : sign.signout
     }
 }
 

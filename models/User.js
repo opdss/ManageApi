@@ -12,6 +12,14 @@ var UserSchema = new Schema({
     'createTime' : {type: Date, default: Date.now()}
 });
 
-UserSchema.index({'username': 1});
+UserSchema.index({'username': 1, 'email': 1}, {unique : true});
+
+UserSchema.statics.findByEmail = function(email, callback){
+    this.findOne({'email' : email}, callback);
+}
+
+UserSchema.statics.signin = function(username, password, callback){
+    this.findOne({'email' : email}, callback);
+}
 
 mongoose.model('User', UserSchema);

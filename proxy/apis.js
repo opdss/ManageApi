@@ -12,12 +12,12 @@ exports.getInfoById = function(apiId, callback){
     Apis.findOne({'_id': apiId}).exec(callback);
 }
 
-exports.getListByItemId = function(itemsId, callback){
+exports.getListByItemId = function(itemId, callback){
     var query = {
-        'itemsId' : itemsId,
+        'itemId' : itemId,
         'isDel' : false
     }
-    Apis.find(query, null, null, callback);
+    Apis.find({}, null, null, callback);
 };
 
 function getList(){
@@ -25,3 +25,7 @@ function getList(){
     var opts = null;
     Apis.find(query, null, opts, callback);
 }
+
+exports.delById = function(id, callback){
+    Apis.remove({_id: id}, callback);
+};

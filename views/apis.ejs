@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title><%=title%></title>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap-select.min.css">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="js/libs/jquery/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="js/libs/bootstrap/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+        }
+        ._sidebar {
+            background-color: #f5f5f5;
+            border-right: 1px solid #eee;
+            bottom: 0;
+            display: block;
+            left: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 0px;
+            position: fixed;
+            top: 51px;
+            z-index: 1000;
+        }
+        ._nav-sidebar > li > a {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        ._example  ._highlight {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            border-width: 1px;
+            margin-left: 0;
+            margin-right: 0;
+            margin-top: -16px;
+        }
+        ._highlight {
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+            border-radius: 4px;
+            margin-bottom: 0px;
+            padding: 0px;
+        }
+        ._example {
+            background-color: #fff;
+            border-color: #ddd;
+            border-radius: 4px 4px 0 0;
+            border-width: 1px;
+            box-shadow: none;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        ._input{
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            box-shadow: none;
+            border-radius: 0px;
+        }
+        ._input:focus{
+            box-shadow: none;
+        }
+        ._tool_div{
+            padding-top:12px
+        }
+        li.active{border-bottom:3px #66afe9 solid;}
+    </style>
+
+</head>
+<body>
+
+<%- include('nav') -%>
+<!--********************************-->
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-2 _sidebar">
+            <ul class="nav nav-justified" role="tablist">
+                <li role="presentation" class="active"><a href="#apis" aria-controls="apis" role="tab" data-toggle="tab">apis</a></li>
+                <li role="presentation"><a href="#history" aria-controls="history" role="tab" data-toggle="tab">history</a></li>
+            </ul>
+            <!-- request tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="apis">
+                    <ul class="nav _nav-sidebar" >
+                        <!--<li><a href="javascript:void(0)" class="_apiList" id=""><code>GET</code>http://www.baidu.com</a></li>-->
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="history">
+                    <ul class="nav _nav-sidebar">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-9 col-md-offset-2"  style="padding:10px;">
+            <!-- 请求框 start -->
+            <div style="border:1px #999 solid;border-radius:5px;padding:10px;margin:5px;">
+                <!-- 地址栏 start -->
+                <div class="row ">
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <select class="selectpicker " data-width="80px">
+                                    <option value="get">GET</option>
+                                    <option value="post">POST</option>
+                                </select>
+                            </div>
+                            <input type="text" class="form-control" aria-label="..." value="http://localhost:3000/items">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-danger">参数</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-danger">发送</button>
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">发送</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btn btn-danger ">保存</button>
+                    </div>
+                </div>
+                <!-- 地址栏 end -->
+                <!-- 参数tab start -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- request tabs -->
+                        <ul class="nav navbar-nav" role="tablist"> <!--nav-tabs-->
+                            <li role="presentation" class="active"><a href="#headers" aria-controls="headers" role="tab" data-toggle="tab">headers</a></li>
+                            <li role="presentation"><a href="#request_body" aria-controls="request_body" role="tab" data-toggle="tab">body</a></li>
+                        </ul>
+                        <!-- request tab panes -->
+                        <div class="tab-content col-md-12 ">
+                            <div role="tabpanel" class="tab-pane active" id="headers">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="name">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="value">
+                                    </div>
+                                    <div class="col-xs-2 _tool_div">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="name">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="value">
+                                    </div>
+
+                                    <div class="col-xs-2 _tool_div">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="name">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="value">
+                                    </div>
+
+                                    <div class="col-xs-2 _tool_div">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="request_body">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="name">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="value">
+                                    </div>
+
+                                    <div class="col-xs-2 _tool_div">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="name">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="value">
+                                    </div>
+
+                                    <div class="col-xs-2 _tool_div">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 参数tab end -->
+            </div>
+            <!-- 请求框 end -->
+            <!-- 响应框 start -->
+            <div>
+                <!--选项卡状态栏 start-->
+                <!-- response tabs   border:1px #999 solid;border-radius:5px;padding:10px;margin:5px;-->
+                <div style="border:1px #999 solid;border-radius:5px;padding:0px 15px;margin:5px;">
+                    <div class="row _highlight" >
+                        <ul class="nav navbar-nav" role="tablist"> <!--nav-tabs-->
+                            <li role="presentation" class="active"><a href="#response_body" aria-controls="response_body" role="tab" data-toggle="tab">response_body</a></li>
+                            <li role="presentation"><a href="#response_headers" aria-controls="response_headers" role="tab" data-toggle="tab">response_headers</a></li>
+                        </ul>
+                    </div>
+                    <!-- response tab panes -->
+
+                    <div class="row _example">
+                        <div class="tab-content col-md-12 ">
+                            <div role="tabpanel" class="tab-pane active" id="response_body">
+                                <div style="border:1px #999 solid;border-radius:5px;padding:10px 0px;margin:10px 0px;">
+                                    <code>
+                                        {
+                                        "errno": 0,
+                                        "errmsg": "success",
+                                        "time": 1462426969,
+                                        "data": {
+                                        "pageInfo": {
+                                        "totalCount": 147,
+                                        "pageCount": 8,
+                                        "targetPage": 1,
+                                        "pageSize": 20
+                                        },
+                                        "records": []
+                                        }
+                                        }
+                                    </code>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="response_headers">
+                                testt
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--选项卡状态栏 end-->
+                </div>
+                <!-- 响应框 end -->
+            </div>
+
+
+        </div>
+    </div>
+
+    <!--================================================== -->
+    <script>
+        $('.selectpicker').selectpicker({
+            style: 'btn-info',
+            size: 20
+        });
+        var itemId = '572c01e9017a23540c584824';
+        var apiId = '2';
+        (function(itemId, apiId){
+
+            var apisUl = $('#apis ul');
+            var historyUl = $('#history ul');
+
+            this.apiAddress = {
+                'getApiListByItemId' : '/apis/list',
+                'getApiListByHistory' : '/history/list',
+                'sendReuest' : '',
+                'getApiInfoByItemApiId' : '',
+                'getApiInfoByHistoryId' : ''
+            }
+
+            this.getApiInfoByItemApiId = function(apiId){
+                this.ajax(apiAddress.getApiListByItemId, 'GET', {'itemId':itemId}, function(msg){
+                    console.log(msg);
+                    alert(msg);
+                });
+            }
+
+            this.getApiInfoByHistoryId = function(md5Api){
+                this.ajax(apiAddress.getApiListByItemId, 'GET', {'itemId':itemId}, function(msg){
+                    console.log(msg);
+                    alert(msg);
+                });
+            }
+
+            this.getApiListByItemId = function(itemId){
+                this.ajax(apiAddress.getApiListByItemId, 'GET', {'itemId':itemId}, function(msg){
+                    if(msg.errno!=0){
+                        alert(msg.msg);
+                    }else{
+                        if(msg.data.length == 0){
+                            apisUl.append('<li><a href="javascript:void(0)" class="" id=""><code>没有相关接口</code></a></li>')
+                        }else{
+                            $.each(msg.data, function(index, obj){
+                                var li = '<li><a href="javascript:void(0)" class="_apiList" id="'+obj._id+'"><code>'+obj.method+'</code>'+obj.url+'</a></li>';
+                                apisUl.append(li);
+                            });
+                        }
+                    }
+                });
+            }
+
+            this.getApiListByHistory = function(itemId){
+                this.ajax(apiAddress.getApiListByHistory, 'GET', {'itemId':itemId}, function(msg){
+                    if(msg.errno!=0){
+                        alert(msg.msg);
+                    }else{
+                        if(msg.data.length == 0){
+                            historyUl.append('<li><a href="javascript:void(0)" class="" id=""><code>没有相关接口</code></a></li>')
+                        }else{
+                            $.each(msg.data, function(index, obj){
+                                var li = '<li><a href="javascript:void(0)" class="_apiList" id="'+obj._id+'"><code>'+obj.method+'</code>'+obj.url+'</a></li>';
+                                historyUl.append(li);
+                            });
+                        }
+                    }
+                });
+            }
+
+            this.ajax = function(url, method, data, callback){
+                $.ajax({
+                    'url' : url,
+                    'async' : 'true',
+                    'method' : method,
+                    'data' : data,
+                    'dataType' : "json",
+                    'success' : callback,
+                    'error' : function(err){
+                        alert('请求好像出错了');
+                    },
+                    'timeout' : 30000,
+                });
+            }
+
+            this.init = function(){
+                this.getApiListByItemId(itemId);
+                this.getApiListByHistory(itemId);
+            }
+
+            this.init();
+
+        })(itemId, apiId);
+    </script>
+</div>
+</body>
+</html>

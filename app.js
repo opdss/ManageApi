@@ -48,9 +48,7 @@ app.use(express.static(path.join(__dirname, 'public'), {setHeaders: function (re
 }}));
 
 app.use(function(req, res, next){
-  res.toJson = function(msg){
-    res.json({'code':1,'msg':msg});
-  }
+  req.session.userInfo = {username:'wuxin', email:'opdss@qq.com', '_id': '5731f03c41f193dc038e7657'}
   next();
 })
 
