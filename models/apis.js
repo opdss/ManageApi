@@ -11,11 +11,11 @@ var ApisSchema = new Schema({
     'url': {type: String},  //接口地址
     'method': {type: String},  //请求方法. 如 get
     'description': {type: String, default: ''}, //简介说明
-    'params' : {type: String, default: []},  //参数组
-    'reqBody' : {type: String, default: ''},  //请求body
-    'resBody' : {type: String, default: ''},  //响应body
-    'reqHeader' : {type: String, default: ''}, //请求header
-    'resHeader' : {type: String, default: ''}, //响应header
+    'params' : {type: [ObjectId], default: []},  //参数组
+    'reqBody' : {type: Object, default: ''},  //请求body
+    //'resBody' : {type: String, default: ''},  //响应body
+    'reqHeader' : {type: Object, default: ''}, //请求header
+    //'resHeader' : {type: Object, default: ''}, //响应header
     'authorId': {type: ObjectId}, //创建者
     'itemId': {type: ObjectId}, //所属组
     'createTime': {type: Date, default: Date.now}, //创建时间

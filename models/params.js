@@ -7,8 +7,8 @@ var Schema = mongoose.Schema;
 var ObjectId  = Schema.ObjectId;
 
 var ParamsSchema = new Schema({
-    'title' : {type: String},    //名称
-    'field' : {type: String},  //参数名称 如 page
+    'name' : {type: String},    //名称
+    'value' : {type: String},  //参数名称 如 page
     'isMust': {type: Boolean, default: false},  //是否必须
     'type': {type: String, default: 'string'}, //参数类型
     'description' : {type: String},  //参数说明

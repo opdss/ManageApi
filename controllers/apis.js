@@ -70,6 +70,24 @@ exports.add = function(req, res, next){
         'createTime': Date.now(), //创建时间
         'isDel' : false, //伪删除
     }
+
+    var data = {
+        'title': '测试地址', //名称
+        'url': 'http://localhost:3000/apis/add',  //接口名. 如 item/del
+        'method': 'GET',  //请求方法. 如 get
+        'description': '本项目的添加接口', //简介说明
+        'params' : [],  //参数组
+        'reqBody' : {'a':'fwaef','b':'aegae', 'c':'2323r3'},  //请求body
+        //'resBody' : '',  //响应body
+        'reqHeader' : {'TOKEN':'hoaihfoiuaheaneafphgo','K':'afbh445434563', 'T':'23aefqgq34geagaega'}, //请求header
+        //'resHeader' : {}, //响应header
+        'authorId': req.session.userInfo._id, //创建者
+        'itemId': '572c01e9017a23540c584824', //所属组
+        'createTime': Date.now(), //创建时间
+        'isDel' : false, //伪删除
+    }
+
+
     console.log(data);
     if(!verify.api(data)) {
         return res.json({'errno': 1, 'errmsg': '输入信息有误'});
@@ -102,4 +120,28 @@ exports.debug = function(req, res, next){
     requests.get('http://www.baidu.com',{},function(reqInfo, resInfo){
         res.send(resInfo);
     })
+}
+
+exports.send = function(req, res, next){
+/*
+    //不能正确解析json 格式的post参数
+    var body = '', jsonStr;
+    req.on('data', function (chunk) {
+        body += chunk; //读取参数流转化为字符串
+    });
+    req.on('end', function () {
+        //读取参数流结束后将转化的body字符串解析成 JSON 格式
+        try {
+            jsonStr = JSON.parse(body);
+        } catch (err) {
+            jsonStr = null;
+        }
+        console.log(jsonStr);
+        res.json({'errno': 0, 'errmsg': 'success', data: jsonStr});
+        //res.json({'errno': 0, 'errmsg': 'success', data: body});
+    });*/
+
+    console.log(req.body);
+    var data = req.body;
+    res.json({'errno': 0, 'errmsg': 'success', data: JSON.parse(data.data)});
 }

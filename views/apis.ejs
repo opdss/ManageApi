@@ -19,6 +19,7 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="js/libs/bootstrap/bootstrap.min.js"></script>
     <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/eventproxy.js"></script>
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -90,17 +91,17 @@
 
         <div class="col-md-2 _sidebar">
             <ul class="nav nav-justified" role="tablist">
-                <li role="presentation" class="active"><a href="#apis" aria-controls="apis" role="tab" data-toggle="tab">apis</a></li>
-                <li role="presentation"><a href="#history" aria-controls="history" role="tab" data-toggle="tab">history</a></li>
+                <li role="presentation" class="active"><a href="#apiList" aria-controls="apiList" role="tab" data-toggle="tab">apis</a></li>
+                <li role="presentation"><a href="#historyList" aria-controls="historyList" role="tab" data-toggle="tab">history</a></li>
             </ul>
             <!-- request tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="apis">
+                <div role="tabpanel" class="tab-pane active" id="apiList">
                     <ul class="nav _nav-sidebar" >
                         <!--<li><a href="javascript:void(0)" class="_apiList" id=""><code>GET</code>http://www.baidu.com</a></li>-->
                     </ul>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="history">
+                <div role="tabpanel" class="tab-pane" id="historyList">
                     <ul class="nav _nav-sidebar">
                     </ul>
                 </div>
@@ -116,12 +117,12 @@
                     <div class="col-md-9">
                         <div class="input-group">
                             <div class="input-group-btn">
-                                <select class="selectpicker " data-width="80px">
-                                    <option value="get">GET</option>
-                                    <option value="post">POST</option>
+                                <select class="selectpicker " id="method" data-width="80px">
+                                    <option value="GET">GET</option>
+                                    <option value="POST">POST</option>
                                 </select>
                             </div>
-                            <input type="text" class="form-control" aria-label="..." value="http://localhost:3000/items">
+                            <input type="text" class="form-control" id="url" value="">
                             <div class="input-group-btn">
                                 <button type="button" class="btn btn-danger">参数</button>
                             </div>
@@ -129,7 +130,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-danger">发送</button>
+                            <button type="button" id="send" class="btn btn-danger">发送</button>
                             <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
@@ -151,71 +152,33 @@
                     <div class="col-md-12">
                         <!-- request tabs -->
                         <ul class="nav navbar-nav" role="tablist"> <!--nav-tabs-->
-                            <li role="presentation" class="active"><a href="#headers" aria-controls="headers" role="tab" data-toggle="tab">headers</a></li>
-                            <li role="presentation"><a href="#request_body" aria-controls="request_body" role="tab" data-toggle="tab">body</a></li>
+                            <li role="presentation" class="active"><a href="#reqHeader" aria-controls="reqHeader" role="tab" data-toggle="tab">headers</a></li>
+                            <li role="presentation"><a href="#reqBody" aria-controls="reqBody" role="tab" data-toggle="tab">body</a></li>
                         </ul>
                         <!-- request tab panes -->
                         <div class="tab-content col-md-12 ">
-                            <div role="tabpanel" class="tab-pane active" id="headers">
-                                <div class="row">
+                            <div role="tabpanel" class="tab-pane active _inputDiv" id="reqHeader">
+                                <div class="row _inputRow">
                                     <div class="col-xs-4">
-                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="name">
+                                        <input type="text" name="key" class="form-control _input" placeholder="name">
                                     </div>
                                     <div class="col-xs-4">
-                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="value">
+                                        <input type="text" name="value" class="form-control _input"  placeholder="value">
                                     </div>
                                     <div class="col-xs-2 _tool_div">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="name">
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="value">
-                                    </div>
-
-                                    <div class="col-xs-2 _tool_div">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="name">
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="value">
-                                    </div>
-
-                                    <div class="col-xs-2 _tool_div">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </div>
-                                </div>
-
 
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="request_body">
-                                <div class="row">
+                            <div role="tabpanel" class="tab-pane _inputDiv" id="reqBody">
+                                <div class="row _inputRow">
                                     <div class="col-xs-4">
-                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="name">
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="value">
-                                    </div>
-
-                                    <div class="col-xs-2 _tool_div">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="name">
+                                        <input type="text" name="key" class="form-control _input" placeholder="name">
                                     </div>
                                     <div class="col-xs-4">
-                                        <input type="email" class="form-control _input" id="exampleInputEmail3" placeholder="value">
+                                        <input type="text" name="value" class="form-control _input"  placeholder="value">
                                     </div>
-
                                     <div class="col-xs-2 _tool_div">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     </div>
@@ -223,6 +186,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="apiDataDiv" style="display:none">
                 </div>
                 <!-- 参数tab end -->
             </div>
@@ -278,41 +243,62 @@
     </div>
 
     <!--================================================== -->
-    <script>
+    <script>/*
         $('.selectpicker').selectpicker({
             style: 'btn-info',
             size: 20
-        });
+        });*/
         var itemId = '572c01e9017a23540c584824';
         var apiId = '2';
         (function(itemId, apiId){
 
-            var apisUl = $('#apis ul');
-            var historyUl = $('#history ul');
+            //键值对的输入框先clone一个下来
+            var kvInputRow = $('._inputRow').eq(0);
 
+            //接口数据存放div
+            var apiDataDiv = $('#apiDataDiv');
+
+            //接口数据存放input
+            var apiDataInput = $('<input type="hidden">');
+
+            //数据接口地址
             this.apiAddress = {
                 'getApiListByItemId' : '/apis/list',
                 'getApiListByHistory' : '/history/list',
-                'sendReuest' : '',
-                'getApiInfoByItemApiId' : '',
-                'getApiInfoByHistoryId' : ''
+                'sendReuest' : '/send',
+                'getApiInfoByItemApiId' : '/apis/info',
+                'getApiInfoByHistoryId' : '/history/info'
             }
 
-            this.getApiInfoByItemApiId = function(apiId){
-                this.ajax(apiAddress.getApiListByItemId, 'GET', {'itemId':itemId}, function(msg){
-                    console.log(msg);
-                    alert(msg);
+            var ep = new EventProxy();
+
+            ep.all('apiList', 'historyList', function(apiList, historyList){
+                if(apiList.data.length > 0){
+                    getApiInfoByItemApiId(apiList.data[0]['_id']);
+                }else if(historyList.data.length > 0){
+                    getApiInfoByHistoryId(historyList.data[0]['md5Api']);
+                }else{
+                    alert('没有任何相关接口');
+                }
+            });
+
+            var apisUl = $('#apiList ul');
+            var historyUl = $('#historyList ul');
+
+            var getApiInfoByItemApiId = function(apiId){
+                //var apiId = '57369e64e71d68b40cceaa63';
+                this.ajax(apiAddress.getApiInfoByItemApiId, 'GET', {'apiId':apiId}, function(msg){
+                    msg.errno == 0 && renderApiData(msg.data);
                 });
             }
 
-            this.getApiInfoByHistoryId = function(md5Api){
-                this.ajax(apiAddress.getApiListByItemId, 'GET', {'itemId':itemId}, function(msg){
-                    console.log(msg);
-                    alert(msg);
+            var getApiInfoByHistoryId = function(md5Api){
+                this.ajax(apiAddress.getApiInfoByHistoryId, 'GET', {'md5Api':md5Api}, function(msg){
+                    msg.errno == 0 && renderApiData(msg.data);
                 });
             }
-
-            this.getApiListByItemId = function(itemId){
+            //获取组的api列表
+            var getApiListByItemId = function(itemId){
                 this.ajax(apiAddress.getApiListByItemId, 'GET', {'itemId':itemId}, function(msg){
                     if(msg.errno!=0){
                         alert(msg.msg);
@@ -321,15 +307,16 @@
                             apisUl.append('<li><a href="javascript:void(0)" class="" id=""><code>没有相关接口</code></a></li>')
                         }else{
                             $.each(msg.data, function(index, obj){
-                                var li = '<li><a href="javascript:void(0)" class="_apiList" id="'+obj._id+'"><code>'+obj.method+'</code>'+obj.url+'</a></li>';
+                                var li = '<li><a href="javascript:void(0)" id="'+obj._id+'"><code>'+obj.method+'</code>'+obj.url+'</a></li>';
                                 apisUl.append(li);
                             });
                         }
+                        ep.emit('apiList', msg);
                     }
                 });
             }
-
-            this.getApiListByHistory = function(itemId){
+            //获取历史列表
+            var getApiListByHistory = function(itemId){
                 this.ajax(apiAddress.getApiListByHistory, 'GET', {'itemId':itemId}, function(msg){
                     if(msg.errno!=0){
                         alert(msg.msg);
@@ -338,13 +325,197 @@
                             historyUl.append('<li><a href="javascript:void(0)" class="" id=""><code>没有相关接口</code></a></li>')
                         }else{
                             $.each(msg.data, function(index, obj){
-                                var li = '<li><a href="javascript:void(0)" class="_apiList" id="'+obj._id+'"><code>'+obj.method+'</code>'+obj.url+'</a></li>';
+                                var li = '<li><a href="javascript:void(0)" id="'+obj.md5Api+'"><code>'+obj.method+'</code>'+obj.url+'</a></li>';
                                 historyUl.append(li);
                             });
                         }
+                        ep.emit('historyList', msg);
                     }
                 });
             }
+            var getApiData = function(){
+                var apiId = $(this).find('a').attr('id');
+                getApiInfoByItemApiId(apiId);
+            }
+
+            var getHistoryData = function(){
+                var md5Api = $(this).find('a').attr('id');
+                getApiInfoByHistoryId(md5Api);
+            }
+            //移除键值对参数
+            var paramsRemove = function(){
+                var inputRow = $(this).parents('div._inputRow');
+                //如果是最后一个则不移除,只是清空数据
+                if(inputRow.siblings().length > 0){
+                    inputRow.remove();
+                }else{
+                    inputRow.find('input').val('');
+                }
+            }
+
+            //创建键值对输入框
+            var createInput = function(){
+                var inputRow = $(this).parents('div._inputRow');
+                //如果是最后一个才新建
+                if(inputRow.siblings().length == inputRow.index()){
+                    var _inputRow = inputRow.clone();
+                    _inputRow.find('input').val('');
+                    inputRow.after(_inputRow);
+                }
+            }
+            //对数据元字段在调试界面对应的渲染方法put和获取方法get
+            var apiDataMapFunc = {
+                'method' : {
+                    obj : $('#method'),
+                    put : function(data){
+                        this.obj.find("option[text='"+data+"']").attr("selected",true);
+                    },
+                    get : function(){
+                        return this.obj.val();
+                    }
+                },
+                'title' : {
+                    obj : $('title'),
+                    put : function(data){
+                        this.obj.text(data);
+                    },
+                    get : function(){
+                        return this.obj.text();
+                    }
+                },
+                'url' : {
+                    obj : $('#url'),
+                    put : function(data){
+                        this.obj.val(data);
+                    },
+                    get : function(){
+                        return this.obj.val();
+                    }
+                },
+                'reqHeader' : {
+                    put : function(data){
+                        var reqHeader = $('#reqHeader');
+                        reqHeader.html('');
+                        if(data){
+                            for (var x in data) {
+                                var inp = kvInputRow.clone();
+                                inp.find('input[name=key]').val(x);
+                                inp.find('input[name=value]').val(data[x]);
+                                reqHeader.append(inp);
+                            }
+                        }
+                        reqHeader.append(kvInputRow.clone());
+                    },
+                    get : function(){
+                        var inputRow = $('#reqHeader ._inputRow');
+                        var data = {};
+                        for (var i=0; i<inputRow.length; i++) {
+                            var key = inputRow.eq(i).find('input[name=key]').val();
+                            if(key){
+                                data[key] = inputRow.eq(i).find('input[name=value]').val()
+                            }
+                        }
+                        return data;
+                    }
+                },
+                'reqBody' : {
+                    put : function(data){
+                        var reqBody = $('#reqBody');
+                        reqBody.html('');
+                        if(data){
+                            for (var x in data) {
+                                var inp = kvInputRow.clone();
+                                inp.find('input[name=key]').val(x);
+                                inp.find('input[name=value]').val(data[x]);
+                                reqBody.append(inp);
+                            }
+                        }
+                        reqBody.append(kvInputRow.clone());
+                    },
+                    get : function(){
+                        var inputRow = $('#reqBody ._inputRow');
+                        var data = {};
+                        for (var i=0; i<inputRow.length; i++) {
+                            var key = inputRow.eq(i).find('input[name=key]').val();
+                            if(key){
+                                data[key] = inputRow.eq(i).find('input[name=value]').val()
+                            }
+                        }
+                        return data;
+                    }
+                }
+                //'description' : function(data){}
+            }
+            /*
+             渲染页面调试数据
+             data = {
+                 "_id":"5735f0e72198126a06b11b58",
+                 "title":"测试地址",
+                 "url":"http://localhost:3000/apis/add",
+                 "method":"GET",
+                 "authorId":"5731f03c41f193dc038e7657",
+                 "itemId":"572c01e9017a23540c584824",
+                 "__v":0,
+                 "createTime":"2016-05-13T15:21:11.860Z",
+                 "resHeader":"",
+                 "reqHeader":{"TOKEN":"hoaihfoiuaheaneafphgo"},
+                 "resBody":"",
+                 "reqBody":"",
+                 "params":[],
+                 "description":"本项目的添加接口"
+             }
+            */
+            var renderApiData = function(data){
+                //apiDataDiv清空,存放不渲染数据
+                apiDataDiv.html('');
+                for(var x in data){
+                    if(apiDataMapFunc[x]) {
+                        apiDataMapFunc[x]['put'](data[x]);
+                    }else{
+                        var inp = apiDataInput.clone();
+                        apiDataDiv.append(inp.attr({'name': x, 'value': data[x]}));
+                    }
+                }
+            }
+
+            var getterApiData = function(){
+                var data = {};
+                for(var x in apiDataMapFunc){
+                    data[x] = apiDataMapFunc[x].get();
+                }
+                var inputs = apiDataDiv.find('input');
+                for (var i=0; i<inputs.length; i++) {
+                    data[inputs.eq(i).attr('name')] = inputs.eq(i).val();
+                }
+                return data;
+            }
+
+            var request = function(){
+                var data = getterApiData();
+                $.ajax({
+                    'url' : apiAddress.sendReuest,
+                    'async' : 'true',
+                    'method' : 'POST',
+                    //'data' : {'data' : JSON.stringify(data)},
+                    'data' : JSON.stringify(data),
+                    'dataType' : "json",
+                    'contentType': "application/json; charset=utf-8",
+                    'success' : function(msg){
+                        console.log(msg)
+                        if(msg.errno!=0){
+                            alert(msg.msg);
+                        }else{
+                            //console.log(msg)
+                        }
+                    },
+                    'error' : function(err){
+                        alert('请求好像出错了');
+                    },
+                    'timeout' : 30000,
+                });
+
+            }
+
 
             this.ajax = function(url, method, data, callback){
                 $.ajax({
@@ -362,13 +533,20 @@
             }
 
             this.init = function(){
-                this.getApiListByItemId(itemId);
-                this.getApiListByHistory(itemId);
+                getApiListByItemId(itemId);
+                getApiListByHistory(itemId);
+                $('div._inputDiv')
+                        .on('click', 'span.glyphicon-remove', paramsRemove)
+                        .on('focus', 'input[name=key]', createInput);
+                $('#apiList').on('click', 'li', getApiData);
+                $('#historyList').on('click', 'li', getHistoryData);
+                $('#send').on('click', request);
             }
 
             this.init();
 
         })(itemId, apiId);
+
     </script>
 </div>
 </body>

@@ -43,6 +43,9 @@ var routeConf = {
             'get' : apis.info
         }
     },
+    '/send' : {
+        'post' : apis.send
+    },
     //接口组即项目管理
     '/items' : {
         '/list' : {
@@ -122,6 +125,4 @@ router.map(routeConf);
 //router.get('/', site.index);
 //router.get('/home', site.home);
 
-//接口管理
-router.get('')
 module.exports = router;

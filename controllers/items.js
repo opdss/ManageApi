@@ -5,9 +5,22 @@ var Items = require('../proxy').Items;
 var ItemsModel = require('../models').Items;
 var EventProxy = require('eventproxy');
 var verify = require('../common/verify.js');
+var config = require('../config.js');
 
 exports.list = function(req, res, next){
-    res.send('faefae');
+    var page = parseInt(req.query.page, 10) || 1;
+    page = page > 0 ? page : 1;
+    var limit = parseInt(req.query.limit, 10) || config.pageSize;
+    limit = limit > 0 ? limit : config.pageSize;
+    var options = { skip: (page - 1) * limit, limit: limit};
+
+    Items.getList({'isDel': false}, options, function(err,data){
+        if(!err){
+            res.json({'errno': 0, 'errmsg': 'success', data: data});
+        }else{
+            res.json({'errno': 1, 'errmsg': err});
+        }
+    })
 }
 
 exports.showAdd = function(req, res, next){
